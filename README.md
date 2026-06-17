@@ -14,6 +14,12 @@ The primary aim of this repository is to evaluate whether the hctsa analysis pip
   * `LV02.edf` (dreamful condition)
   * `LV03.edf` (dreamless condition)
 
+* **Preprocessing parameters:**
+  * `Sampling frequency after downsampling: 128 Hz
+  * Bandpass filter: 0.75–30 Hz
+  * Epoch length: 60 seconds
+  * Epochs analysed: Final 10 epochs prior to awakening
+  
 ## Software Requirements
 
 * MATLAB R2022b
