@@ -1,14 +1,14 @@
 # SleepTalking_DREAMEEG_HCTSA_test
 This repository includes the script used for hctsa analyses. The test dataset is on deGennaro_SleepTalking dataset. The overarching purpose is to confirm if these scripts can be applied for other datasets with minimal changes in parameters.
 
-# Dataset information:
+## Dataset information:
 - Name: DeGennaro_SleepTalking (from DREAM database)
 - No. of subject: 12
 - No. of samples: 22
 - Samples used in this analysis: LV02.edf (dreamful condition) and LV03.edf (dreamless condition) 
 
 All scripts are run on MATLAB 2022b, and hctsa v1.06.
--
+
 The order in which to run the scripts is as follows:
 -
   1. preprocessing_onecase.m
