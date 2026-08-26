@@ -18,7 +18,7 @@ The primary aim of this repository is to evaluate whether the hctsa analysis pip
   * `Sampling frequency after downsampling: 128 Hz
   * Bandpass filter: 0.75–30 Hz
   * Epoch length: 60 seconds
-  * Epochs analysed: Final 10 epochs prior to awakening
+  * Epochs analysed: Final 6 epochs prior to awakening
   
 ## Software Requirements
 
