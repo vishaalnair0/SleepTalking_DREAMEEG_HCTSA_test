@@ -16,11 +16,9 @@ clear data_one_subject;
 
 datapoints = 7680; 
 
-P1_allcases = reshape(data_P1, datapoints, (32*6)); % (channels*cases)
-P1_allcases = (P1_allcases)'; % transpose matrix
+P1_allcases = reshape(permute(data_P1,[2 1 3]), datapoints, 32*6)' % (channels*cases)
 
-P2_allcases = reshape(data_P2, datapoints, (32*6));
-P2_allcases = (P2_allcases)'; % transpose matrix
+P2_allcases = reshape(permute(data_P2,[2 1 3]), datapoints, 32*6)';
 
 allP_allcases = [P1_allcases;P2_allcases]; % results in a matrix where top half is P1 and bottom half is P2 (DF followed by DL)
 
