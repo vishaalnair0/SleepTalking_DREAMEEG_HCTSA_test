@@ -30,7 +30,7 @@ The primary aim of this repository is to evaluate whether the hctsa analysis pip
 The scripts should be executed in the following order:
 
 1. `preprocessing_sixcases_oneparticipant.m` 
-   * Loads a single EDF file for preprocessing and filter
+   * Loads a single EDF file, epoch 60s segments from the last 6 minutes, bandpass filter and downsample
 2. `run_hctsa_twosubjects.m`
    * Prepares the data matrix and input files to run HCTSA. This script is specifically coded for 6 samples from 2 participants each
 3. `TS_Init_specified_parameters.m`
