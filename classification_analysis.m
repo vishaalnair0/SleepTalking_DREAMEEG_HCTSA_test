@@ -28,7 +28,7 @@ for channel = 1:length(channels)
     chandata = main_matrix(channel_ID,:);
     
     for feature = 1:size(chandata,2) 
-        for teqst_case = 1: length(nCases)
+        for test_case = 1: length(nCases)
             
             trainrows = find(~(subject_ID == test_case));
             
