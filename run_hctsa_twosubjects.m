@@ -4,23 +4,33 @@ clear;clc
 
 addpath 'D:\DREAMEEG_hctsa\Sleep Talking' %% custom file location where data is stored in local device
 
-load("data_LV02.mat"); % dreamful condition
-data_P1 = data_one_subject;
+load("data_LV02.mat"); % LV02 DR
+data_P1_DR = threecases_onesubject;
 
-load("data_LV03.mat") % dreamless condition
-data_P2 = data_one_subject;
+load("data_LV03.mat") % LV03 NR
+data_P1_NR = threecases_onesubject;
 
-clear data_one_subject;
+load("data_MB01.mat"); % MB01 DR
+data_P2_DR = threecases_onesubject;
+
+load("data_MB02.mat") % Mb02 NR
+data_P2_NR = threecases_onesubject;
+
+clear threecases_onesubject;
 
 %% Collapse dimensions to get main data matrix
 
-datapoints = 7680; 
+datapoints = 7680; % expected no. of datapoints at fs = 128 Hz
 
-P1_allcases = reshape(permute(data_P1,[2 1 3]), datapoints, 32*6)' % (channels*cases)
+P1_DR_allcases = reshape(permute(data_P1_DR,[2 1 3]), datapoints, 32*3)'; % (channels*cases)
 
-P2_allcases = reshape(permute(data_P2,[2 1 3]), datapoints, 32*6)';
+P1_NR_allcases = reshape(permute(data_P1_NR,[2 1 3]), datapoints, 32*3)';
 
-allP_allcases = [P1_allcases;P2_allcases]; % results in a matrix where top half is P1 and bottom half is P2 (DF followed by DL)
+P2_DR_allcases = reshape(permute(data_P2_DR,[2 1 3]), datapoints, 32*3)';
+
+P2_NR_allcases = reshape(permute(data_P2_NR,[2 1 3]), datapoints, 32*3)';
+
+allP_allcases = [P1_DR_allcases;P1_NR_allcases; P2_DR_allcases; P2_NR_allcases]; % results in a matrix where top half is P1 and bottom half is P2 
 
 %% Assign labels 
 
@@ -42,14 +52,16 @@ label_names = (label_names)';
 %% Assign keywords
 
 % NOTE:Preparing the keywords list usually requires us to use loops as there is no specific order to the labels for each case. 
-% However here, I have ordered them to be dreamful(DF) followed by dreamless(DL), so preparing the keyword variable is very straightfoward here
+% However for this test set, I have ordered them by participant and dream condition, so preparing the keyword variable is very straightfoward here
 
-rows = 384; % no. of rows for allP_allcases
+dream_status = [ones(3,1); zeros(3,1); ones(3,1); zeros(3,1)]; % participant order LV followed by MB, 3 cases per participant 
 
-keyword_list = cell(rows, 1); 
+keywords = cell(size(dream_status));
+keywords(dream_status == 1) = {'Dreamful'};
+keywords(dream_status == 0) = {'Dreamless'};
 
-keyword_list(1:192)   = repmat({'Dreamful'}, 192, 1);
-keyword_list(193:384) = repmat({'Dreamless'}, 192, 1);
+keyword_list = repelem(keywords(:), 32, 1); % 32 = channels
+
 
 %% Assign input files for HCTSA
 timeSeriesData = allP_allcases;

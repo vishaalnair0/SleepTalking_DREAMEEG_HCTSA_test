@@ -23,12 +23,13 @@ channel_names = (labels)'; % I transpose so that it is easier to work with given
 
 %% Creating variables_list 
 
+% Number of channels
 channels = 1:32;
 
-dream_status = NaN(12,1); % 12 = number of cases - 6 cases per participant data
+% Dream condition for LV02, LV03, MB01, and MB02
+% LV02 & MB01 = DR, LV03 & MB02 = NR
 
-dream_status(1:6,1) = 1;
-dream_status(7:12,1) = 0; % we label it this way because I've ordered DF condition at the first half of the matrix, and DL in the bottom half
+dream_status = [ones(3,1); zeros(3,1); ones(3,1); zeros(3,1)]; % participant order LV followed by MB, 3 cases per participant 
 
 nParticipant = [1 2];
 
@@ -38,7 +39,8 @@ channels_to_exclude = [4;8;9;12;13;16;17;21;28;29;30;31;32];
 
 %% Save variables
 
-save("channel_names.mat","channel_names");
+% save("channel_names.mat","channel_names"); % !! Already done !!
+
 save("Variable_list.mat","dream_status","nParticipant","channels");
 save("channels_excluded.mat","channels_to_exclude");
 
